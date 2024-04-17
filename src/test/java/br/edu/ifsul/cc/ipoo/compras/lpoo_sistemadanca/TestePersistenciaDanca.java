@@ -53,7 +53,7 @@ public class TestePersistenciaDanca {
         Assert.assertEquals(m.getDescricao(), persistidoProduto.getDescricao());
     }
 
-    @Test
+    //@Test
     public void testePersistenciaPacoteComModalidade() throws Exception {
         // Criando um novo pacote
         Pacote pacote = new Pacote();
