@@ -16,9 +16,12 @@ public class Pagamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+<<<<<<< HEAD
     
     @Temporal(TemporalType.DATE)
     @NotNull(message = "A data de vencimento é obrigatória")
+=======
+>>>>>>> 0c05345f102a29fc17b995c76bb21db24d9c9418
     private Calendar dataVcto;
     private Double valor;
     private Calendar dataPgto;

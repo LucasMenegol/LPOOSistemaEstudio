@@ -36,7 +36,11 @@ public class TestePersistenciaDanca {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
+<<<<<<< HEAD
     //@Test
+=======
+    @Test
+>>>>>>> 0c05345f102a29fc17b995c76bb21db24d9c9418
     public void testePersistenciaModalidade() throws Exception {
         
         Modalidade m = new Modalidade();
@@ -50,6 +54,7 @@ public class TestePersistenciaDanca {
         Assert.assertEquals(m.getDescricao(), persistidoProduto.getDescricao());
     }
     
+<<<<<<< HEAD
     @Test
 public void testePersistenciaPacoteComModalidade() throws Exception {
     // Criando um novo pacote
@@ -109,6 +114,8 @@ public void testePersistenciaContratoComPagamento() throws Exception {
     Assert.assertEquals(pagamento.getValor(), contratoPersistido.getPagamentos().get(0).getValor());
 }
     
+=======
+>>>>>>> 0c05345f102a29fc17b995c76bb21db24d9c9418
     
     
 }
