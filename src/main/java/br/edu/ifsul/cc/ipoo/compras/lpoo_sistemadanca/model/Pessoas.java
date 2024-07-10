@@ -1,26 +1,37 @@
 package br.edu.ifsul.cc.ipoo.compras.lpoo_sistemadanca.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 
-/**
- *
- * @author 20211PF.CC0007
- */
+@MappedSuperclass
 public class Pessoas {
-    
-    Integer Id;
-    String nome;
-    String fone;
-    Calendar dataAniver;
-    String email;
-    String endereco;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "pessoa_id")
+    private Integer id;
+
+    @Column(name = "nome", nullable = false, length = 100)
+    private String nome;
+
+    @Column(name = "fone", nullable = false, length = 15)
+    private String fone;
+
+    @Column(name = "data_aniver", nullable = false)
+    private Calendar dataAniver;
+
+    @Column(name = "email", nullable = false, length = 100)
+    private String email;
+
+    @Column(name = "endereco", nullable = false, length = 255)
+    private String endereco;
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(Integer Id) {
-        this.Id = Id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -62,7 +73,4 @@ public class Pessoas {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
-    
-    
 }
