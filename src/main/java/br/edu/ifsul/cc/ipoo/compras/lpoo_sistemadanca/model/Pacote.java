@@ -1,44 +1,41 @@
 package br.edu.ifsul.cc.ipoo.compras.lpoo_sistemadanca.model;
 
-import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Pacote implements Serializable {
-    @Id
+@Table(name="tb_pacote")
+public class Pacote {
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    @Id
+    @Column(name = "pacote_id")
+    private int id;
     
-    @NotEmpty(message = "A descrição do pacote é obrigatória")
-    @Size(max = 120, message = "A descrição do pacote deve conter até 120 caracteres")
+    @Column(name = "pacote_descricao", nullable = false, length = 120)
     private String descricao;
     
-    private Double valor;
+    @Column(name = "pacote_valor", nullable = false, precision = 2)
+    private double valor;
     
-    @ManyToMany
-    @JoinTable(name = "pacote_modalidade",
-               joinColumns = @JoinColumn(name = "pacote_id"),
-               inverseJoinColumns = @JoinColumn(name = "modalidade_id"))
-    private List<Modalidade> modalidades;
-
-    public <any> getModalidades() {
-        return modalidades;
-    }
-
-    public void setModalidades(<any> modalidades) {
-        this.modalidades = modalidades;
-    }
+    @ManyToOne
+    @JoinColumn(name = "modalidade_id")
+    private Modalidade modalidade;
     
-    public Integer getId() {
+    
+    
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -50,14 +47,22 @@ public class Pacote implements Serializable {
         this.descricao = descricao;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-    // Getters e setters
+    public Modalidade getModalidade() {
+        return modalidade;
+    }
+
+    public void setModalidade(Modalidade modalidade) {
+        this.modalidade = modalidade;
+    }
+    
+    
 }
 
