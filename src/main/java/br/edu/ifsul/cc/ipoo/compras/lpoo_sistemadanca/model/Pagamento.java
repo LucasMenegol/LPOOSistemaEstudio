@@ -1,39 +1,26 @@
 package br.edu.ifsul.cc.ipoo.compras.lpoo_sistemadanca.model;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Calendar;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-/**
- *
- * @author 20211PF.CC0007
- */
 @Entity
-public class Pagamento implements Serializable {
+@Table(name = "tb_pagamento")
+public class Pagamento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "pagamento_id")
     private Integer id;
-<<<<<<< HEAD
-    
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "A data de vencimento é obrigatória")
-=======
->>>>>>> 0c05345f102a29fc17b995c76bb21db24d9c9418
+
+    @Column(name = "data_vcto", nullable = false)
     private Calendar dataVcto;
-    private Double valor;
-    private Calendar dataPgto;
-    private Double valorPgto;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "valor", precision = 2, nullable = false)
+    private double valor;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "contrato_id", nullable = false)
+    private Contrato contrato;
 
     public Calendar getDataVcto() {
         return dataVcto;
@@ -43,30 +30,24 @@ public class Pagamento implements Serializable {
         this.dataVcto = dataVcto;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-    public Calendar getDataPgto() {
-        return dataPgto;
+    public Contrato getContrato() {
+        return contrato;
     }
 
-    public void setDataPgto(Calendar dataPgto) {
-        this.dataPgto = dataPgto;
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
     }
 
-    public Double getValorPgto() {
-        return valorPgto;
+    public void gerarPagamento(double valor, Calendar dataVcto) {
+        this.valor = valor;
+        this.dataVcto = dataVcto;
     }
-
-    public void setValorPgto(Double valorPgto) {
-        this.valorPgto = valorPgto;
-    }
-    
-    
-    
 }
