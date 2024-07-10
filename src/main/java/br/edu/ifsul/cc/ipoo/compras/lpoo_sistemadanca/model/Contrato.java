@@ -1,48 +1,54 @@
 package br.edu.ifsul.cc.ipoo.compras.lpoo_sistemadanca.model;
 
-import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 
 @Entity
-public class Contrato implements Serializable {
+@Table(name = "tb_contrato")
+public class Contrato {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    @Column(name="contrato_id")
+    private int id;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="contrato_data_inicio", nullable = false)
     private Calendar dataInicio;
     
-    private Double valorDesconto;
+    @Column(name="contrato_valor", precision = 2)
+    private double valor;
     
-    @ManyToOne
-    @JoinColumn(name = "forma_pgto_id")
-    private FormaPgto formaPagamento;
+    @Column(name = "contrato_forma_pgto")
+    @Enumerated(EnumType.STRING) 
+    //não incluindo anotação o JPA assume como padrão que será mapeado no BD
+    // como inteiro referente ao índice do valor informado no Enum
+    // outra opção que podemos usar é o tipo EnumType.STRING
+    private FormaPgto forma_pgto;
     
-    @OneToMany(mappedBy = "contrato")
-    private List<Pagamento> pagamentos;
+    @OneToOne
+    @JoinColumn(name = "aluno_id")
+    private Alunos aluno;
 
-    public <any> getPagamentos() {
-        return pagamentos;
+    public Contrato() {
+        dataInicio = Calendar.getInstance();
     }
+    
+    
 
-    // Getters e setters
-    public void setPagamentos(<any> pagamentos) {
-        this.pagamentos = pagamentos;
-    }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -54,20 +60,22 @@ public class Contrato implements Serializable {
         this.dataInicio = dataInicio;
     }
 
-    public Double getValorDesconto() {
-        return valorDesconto;
+    public double getValor() {
+        return valor;
     }
 
-    public void setValorDesconto(Double valorDesconto) {
-        this.valorDesconto = valorDesconto;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public FormaPgto getFormaPagamento() {
-        return formaPagamento;
+    public FormaPgto getForma_pgto() {
+        return forma_pgto;
     }
 
-    public void setFormaPagamento(FormaPgto formaPagamento) {
-        this.formaPagamento = formaPagamento;
+    public void setForma_pgto(FormaPgto forma_pgto) {
+        this.forma_pgto = forma_pgto;
     }
+    
+    
 }
 
