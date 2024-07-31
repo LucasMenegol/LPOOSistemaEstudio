@@ -1,8 +1,11 @@
 package br.edu.ifsul.cc.ipoo.compras.lpoo_sistemadanca.dao;
 
+import br.edu.ifsul.cc.ipoo.compras.lpoo_sistemadanca.model.*;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,10 +27,15 @@ public class PersistenciaJPA implements InterfacePersistencia {
         return entity.isOpen();
     }
     
-    
+    @Override
+    public void fecharConexao() {
+         entity.close();
+    }
 
-    
-
+    @Override
+    public Object find(Class c, Object id) throws Exception {
+         return entity.find(c,id);
+    }
     
     @Override
     public void persist(Object o) throws Exception {
@@ -42,22 +50,15 @@ public class PersistenciaJPA implements InterfacePersistencia {
         entity.remove(o);
         entity.getTransaction().commit();
     }
-
-    @Override
-    public void fecharConexao() {
-         entity.close();
+    
+    public List<Modalidade> getModalidades() {
+        return entity.createQuery("from Modalidade", Modalidade.class).getResultList();
     }
-
-    @Override
-    public Object find(Class c, Object id) throws Exception {
-         return entity.find(c,id);
-    }
+}
     
    
     
 
     
     
-    
-    
-}
+
