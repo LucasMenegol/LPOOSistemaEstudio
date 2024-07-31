@@ -11,12 +11,6 @@ public class ItensContrato {
     @Column(name = "itens_contrato_id")
     private Integer id;
 
-    @Column(name = "id_contrato", nullable = false)
-    private int idContrato;
-
-    @Column(name = "id_pacote", nullable = false)
-    private int idPacote;
-
     @ManyToOne
     @JoinColumn(name = "contrato_id")
     private Contrato contrato;
@@ -31,22 +25,6 @@ public class ItensContrato {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getIdContrato() {
-        return idContrato;
-    }
-
-    public void setIdContrato(int idContrato) {
-        this.idContrato = idContrato;
-    }
-
-    public int getIdPacote() {
-        return idPacote;
-    }
-
-    public void setIdPacote(int idPacote) {
-        this.idPacote = idPacote;
     }
 
     public Contrato getContrato() {
